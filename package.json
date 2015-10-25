@@ -1,0 +1,19 @@
+{
+  "name": "gulp-wp_s",
+  "version": "1.0.0",
+  "description": "Gulp task for _S WordPress starter theme",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "?.git"
+  },
+  "keywords": [
+    "Gulpjs",
+    "WordPress_theme"
+  ],
+  "author": "nguyenmanh1507",
+  "license": "MIT"
+}
