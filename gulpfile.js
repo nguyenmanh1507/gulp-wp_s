@@ -4,7 +4,10 @@ var gulp = require('gulp'),
 		sourcemaps = require('gulp-sourcemaps'),
 		browserSync = require('browser-sync').create(),
 		rubySass = require('gulp-ruby-sass'),
-		minifyCss = require('gulp-minify-css')
+		minifyCss = require('gulp-minify-css'),
+		imagemin = require('gulp-imagemin'),
+		pngquant = require('imagemin-pngquant'),
+		jshint = require('gulp-jshint')
 	;
 
 // gulp.task('sass', function() {
@@ -28,6 +31,26 @@ gulp.task('rubySass', function() {
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('./'))
 		.pipe(browserSync.stream())
+		;
+});
+
+// Compress Images
+gulp.task('imagemin', function() {
+	return gulp.src('./images/**/*')
+		.pipe(imagemin({
+			progressive: true,
+			svgoPlugins: [{removeViewbox}],
+			use: [pngquant()]
+		}))
+		.pipe(gulp.dest('./images'))
+		;
+});
+
+// JShint Javascript
+gulp.task('lint', function() {
+	return gulp.src('./js/**/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
 		;
 });
 
