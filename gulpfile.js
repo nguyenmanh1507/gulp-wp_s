@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp'),
 		sass = require('gulp-sass'),
 		autoprefixer = require('gulp-autoprefixer'),
@@ -54,12 +56,16 @@ gulp.task('lint', function() {
 		;
 });
 
+// Reload browser after lint task complete
+gulp.task('js-watch', ['lint'], browserSync.reload);
+
 gulp.task('serve', ['rubySass'], function() {
 	browserSync.init({
 		proxy: 'localhost/master/gulp-theme'
 	});
 	gulp.watch('./sass/**/*.scss', ['rubySass']);
-	gulp.watch('**/*.php').on('change', browserSync.reload)
+	gulp.watch('**/*.php').on('change', browserSync.reload);
+	gulp.watch('app/js/*.js', ['js-watch']);
 });
 
 gulp.task('default', ['serve']);
